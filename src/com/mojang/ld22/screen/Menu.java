@@ -10,10 +10,10 @@ import es.wiyarmir.minigdxcraft.gfx.PortScreen;
 import es.wiyarmir.minigdxcraft.screen.GameScreen;
 
 public class Menu {
-	protected GameScreen game; 
+	protected GameScreen game;
 	protected PortInputHandler input;
 
-	public void init(GameScreen game, PortInputHandler input) {
+	public Menu(GameScreen game, PortInputHandler input) {
 		this.game = game;
 		this.input = input;
 	}

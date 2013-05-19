@@ -17,6 +17,7 @@ import com.mojang.ld22.screen.InventoryMenu;
 import com.mojang.ld22.sound.Sound;
 
 import es.wiyarmir.minigdxcraft.Globals;
+import es.wiyarmir.minigdxcraft.PortInputHandler;
 import es.wiyarmir.minigdxcraft.gfx.PortScreen;
 import es.wiyarmir.minigdxcraft.screen.GameScreen;
 
@@ -35,8 +36,12 @@ public class Player extends Mob {
 	private int onStairDelay;
 	public int invulnerableTime = 0;
 
-	public Player(GameScreen game) {
+	private PortInputHandler input;
+
+	public Player(GameScreen game, PortInputHandler input) {
 		this.game = game;
+		this.input = input;
+
 		x = 24;
 		y = 24;
 		stamina = maxStamina;
@@ -85,20 +90,14 @@ public class Player extends Mob {
 
 		int xa = 0;
 		int ya = 0;
-
-		if (Gdx.input.isKeyPressed(Keys.UP)) {
+		if (input.up.down)
 			ya--;
-		}
-		if (Gdx.input.isKeyPressed(Keys.DOWN)) {
+		if (input.down.down)
 			ya++;
-		}
-		if (Gdx.input.isKeyPressed(Keys.LEFT)) {
+		if (input.left.down)
 			xa--;
-		}
-		if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+		if (input.right.down)
 			xa++;
-		}
-
 		if (isSwimming() && tickTime % 60 == 0) {
 			if (stamina > 0) {
 				stamina--;
@@ -111,7 +110,7 @@ public class Player extends Mob {
 			move(xa, ya);
 		}
 
-		if (Gdx.input.isKeyPressed(Globals.KEY_ATTACK)) {
+		if (input.attack.clicked) {
 			if (stamina == 0) {
 
 			} else {
@@ -120,7 +119,7 @@ public class Player extends Mob {
 				attack();
 			}
 		}
-		if (Gdx.input.isKeyPressed(Globals.KEY_MENU)) {
+		if (input.menu.clicked) {
 			if (!use()) {
 				game.setMenu(new InventoryMenu(this, game));
 			}

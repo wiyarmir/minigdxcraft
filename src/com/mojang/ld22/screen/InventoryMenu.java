@@ -13,7 +13,7 @@ public class InventoryMenu extends Menu {
 
 	public InventoryMenu(Player player, GameScreen game) {
 
-		init(game, game.game.input);
+		super(game, game.game.input);
 
 		this.player = player;
 

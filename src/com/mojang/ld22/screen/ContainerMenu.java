@@ -18,22 +18,23 @@ public class ContainerMenu extends Menu {
 	private int window = 0;
 
 	public ContainerMenu(Player player, String title, Inventory container) {
+		super(player.game, player.game.game.input);
 		this.player = player;
 		this.title = title;
 		this.container = container;
 	}
 
 	public void tick() {
-		if (Gdx.input.isKeyPressed(Globals.KEY_MENU))
+		if (input.menu.clicked)
 			game.setMenu(null);
 
-		if (Gdx.input.isKeyPressed(Keys.LEFT)) {
+		if (input.left.clicked) {
 			window = 0;
 			int tmp = selected;
 			selected = oSelected;
 			oSelected = tmp;
 		}
-		if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+		if (input.right.clicked) {
 			window = 1;
 			int tmp = selected;
 			selected = oSelected;
@@ -49,9 +50,9 @@ public class ContainerMenu extends Menu {
 		if (selected >= len)
 			selected = len - 1;
 
-		if (Gdx.input.isKeyPressed(Keys.UP))
+		if (input.up.clicked)
 			selected--;
-		if (Gdx.input.isKeyPressed(Keys.DOWN))
+		if (input.down.clicked)
 			selected++;
 
 		if (len == 0)
@@ -61,7 +62,7 @@ public class ContainerMenu extends Menu {
 		if (selected >= len)
 			selected -= len;
 
-		if (Gdx.input.isKeyPressed(Globals.KEY_ATTACK) && len > 0) {
+		if (input.attack.clicked && len > 0) {
 			i2.add(oSelected, i.items.remove(selected));
 			if (selected >= i.items.size())
 				selected = i.items.size() - 1;

@@ -60,12 +60,10 @@ public class PortInputHandler implements InputProcessor {
 	}
 
 	public PortInputHandler() {
-		Gdx.app.log("input", "new PortInputHandler");
+		Gdx.app.log("input", "new PortInputHandler()");
 	}
 
 	public boolean keyDown(int ke) {
-		// if (inputblocked != 0)
-		// return false;
 		toggle(ke, true);
 		return true;
 	}
@@ -94,11 +92,8 @@ public class PortInputHandler implements InputProcessor {
 			right.toggle(pressed);
 		if (ke == Keys.UP)
 			up.toggle(pressed);
-		if (ke == Keys.DOWN) {
+		if (ke == Keys.DOWN)
 			down.toggle(pressed);
-			Gdx.app.log("input", "down abs:" + down.absorbs + " pr:"
-					+ down.presses);
-		}
 		if (ke == Keys.LEFT)
 			left.toggle(pressed);
 		if (ke == Keys.RIGHT)
@@ -124,6 +119,7 @@ public class PortInputHandler implements InputProcessor {
 			menu.toggle(pressed);
 		if (ke == Keys.C)
 			attack.toggle(pressed);
+
 	}
 
 	@Override

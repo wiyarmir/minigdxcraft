@@ -7,6 +7,7 @@ public class LevelTransitionMenu extends Menu {
 	private int time = 0;
 
 	public LevelTransitionMenu(int dir) {
+		super(null, null);
 		this.dir = dir;
 	}
 

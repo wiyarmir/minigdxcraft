@@ -10,7 +10,6 @@ import com.mojang.ld22.level.tile.Tile;
 import com.mojang.ld22.screen.Menu;
 
 import es.wiyarmir.minigdxcraft.Globals;
-import es.wiyarmir.minigdxcraft.PortInputHandler;
 import es.wiyarmir.minigdxcraft.PortedGame;
 import es.wiyarmir.minigdxcraft.gfx.PortScreen;
 
@@ -65,7 +64,7 @@ public class GameScreen implements Screen {
 		// levels[0] = new Level(128, 128, -3, levels[1]);
 
 		level = levels[currentLevel];
-		player = new Player(this);
+		player = new Player(this, game.input);
 		player.findStartPos(level);
 		level.add(player);
 
@@ -136,7 +135,7 @@ public class GameScreen implements Screen {
 
 		for (int i = 0; i < 10; i++) {
 			if (i < player.health)
-				screen.render(i * 8, screen.h - 8, 0 + 12 * 32,
+				screen.render(i * 8, screen.h - 8, 0 + 11 * 32,
 						Color.get(000, 200, 500, 533), 0);
 			else
 				screen.render(i * 8, screen.h - 8, 0 + 12 * 32,
@@ -144,14 +143,14 @@ public class GameScreen implements Screen {
 
 			if (player.staminaRechargeDelay > 0) {
 				if (player.staminaRechargeDelay / 4 % 2 == 0)
-					screen.render(i * 8, screen.h - 8, 1 + 12 * 32,
+					screen.render(i * 8, screen.h, 1 + 11 * 32,
 							Color.get(000, 555, 000, 000), 0);
 				else
 					screen.render(i * 8, screen.h, 1 + 12 * 32,
 							Color.get(000, 110, 000, 000), 0);
 			} else {
 				if (i < player.stamina)
-					screen.render(i * 8, screen.h, 1 + 12 * 32,
+					screen.render(i * 8, screen.h, 1 + 11 * 32,
 							Color.get(000, 220, 550, 553), 0);
 				else
 					screen.render(i * 8, screen.h, 1 + 12 * 32,
@@ -211,8 +210,10 @@ public class GameScreen implements Screen {
 	}
 
 	public void tick() {
-
 		tickCount++;
+
+		game.input.tick();
+
 		if (!player.removed && !hasWon)
 			gameTime++;
 		if (menu != null) {

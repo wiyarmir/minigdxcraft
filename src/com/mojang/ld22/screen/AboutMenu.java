@@ -11,6 +11,7 @@ public class AboutMenu extends Menu {
 	private Menu parent;
 
 	public AboutMenu(Menu parent) {
+		super(null, null);
 		this.parent = parent;
 	}
 

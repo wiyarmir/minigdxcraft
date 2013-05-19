@@ -11,6 +11,7 @@ public class DeadMenu extends Menu {
 	private int inputDelay = 60;
 
 	public DeadMenu() {
+		super(null, null);
 	}
 
 	public void tick() {
@@ -18,7 +19,7 @@ public class DeadMenu extends Menu {
 			inputDelay--;
 		else if (Gdx.input.isKeyPressed(Globals.KEY_ATTACK)
 				|| Gdx.input.isKeyPressed(Globals.KEY_MENU)) {
-			game.setMenu(new TitleMenu());
+			// game.setMenu(new TitleMenu());
 		}
 	}
 
@@ -44,9 +45,10 @@ public class DeadMenu extends Menu {
 		// 555));
 		// Font.draw(timeString, screen, (2 + 5) * 8, 5 * 8, Color.get(-1, 550,
 		// 550, 550));
-		PortFont.draw("Score:", screen, 2 * 8, 6 * 8, Color.get(-1, 555, 555, 555));
+		PortFont.draw("Score:", screen, 2 * 8, 6 * 8,
+				Color.get(-1, 555, 555, 555));
 		// PortFont.draw("" + game.player.score, screen, (2 + 6) * 8, 6 * 8,
-		//			Color.get(-1, 550, 550, 550));
+		// Color.get(-1, 550, 550, 550));
 		PortFont.draw("Press C to lose", screen, 2 * 8, 8 * 8,
 				Color.get(-1, 333, 333, 333));
 	}

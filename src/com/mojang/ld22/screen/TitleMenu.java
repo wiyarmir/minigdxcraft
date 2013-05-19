@@ -1,22 +1,23 @@
 package com.mojang.ld22.screen;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.mojang.ld22.gfx.Color;
 import com.mojang.ld22.sound.Sound;
 
-import es.wiyarmir.minigdxcraft.Globals;
+import es.wiyarmir.minigdxcraft.PortInputHandler;
 import es.wiyarmir.minigdxcraft.gfx.PortFont;
 import es.wiyarmir.minigdxcraft.gfx.PortScreen;
+import es.wiyarmir.minigdxcraft.screen.GameScreen;
 
 public class TitleMenu extends Menu {
+
+	public TitleMenu(GameScreen game, PortInputHandler input) {
+		super(game, input);
+	}
+
 	private int selected = 0;
 
 	private static final String[] options = { "Start game", "How to play",
 			"About" };
-
-	public TitleMenu() {
-	}
 
 	@Override
 	public void tick() {

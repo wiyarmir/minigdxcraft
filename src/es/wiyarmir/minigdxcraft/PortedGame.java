@@ -7,9 +7,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.mojang.ld22.entity.Player;
-import com.mojang.ld22.level.Level;
-import com.mojang.ld22.screen.Menu;
 
 import es.wiyarmir.minigdxcraft.screen.GameScreen;
 import es.wiyarmir.minigdxcraft.screen.TitleScreen;
