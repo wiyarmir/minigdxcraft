@@ -20,10 +20,15 @@ public class PortedGame extends Game {
 	public TextureRegion[][] spriteMap;
 	private int[] colors = new int[256];
 	public SpriteBatch batch;
+	public PortInputHandler input;
 
 	@Override
 	public void create() {
 		Gdx.app.log(Globals.TAG, "PortedGame create()");
+
+		input = new PortInputHandler();
+		Gdx.input.setInputProcessor(input);
+
 		int pp = 0;
 		for (int r = 0; r < 6; r++) {
 			for (int g = 0; g < 6; g++) {
@@ -49,8 +54,6 @@ public class PortedGame extends Game {
 		// setMenu(new TitleMenu());
 		setScreen(new TitleScreen(this));
 	}
-
-
 
 	public void won() {
 		Gdx.app.log(Globals.TAG, "PortedGame won()");

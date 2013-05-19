@@ -51,7 +51,7 @@ public class PortScreen {
 	}
 
 	public void clear(int i) {
-		
+
 	}
 
 }

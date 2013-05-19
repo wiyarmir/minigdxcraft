@@ -17,13 +17,13 @@ import com.mojang.ld22.screen.InventoryMenu;
 import com.mojang.ld22.sound.Sound;
 
 import es.wiyarmir.minigdxcraft.Globals;
-import es.wiyarmir.minigdxcraft.PortedGame;
 import es.wiyarmir.minigdxcraft.gfx.PortScreen;
+import es.wiyarmir.minigdxcraft.screen.GameScreen;
 
 public class Player extends Mob {
 	private int attackTime, attackDir;
 
-	public PortedGame game;
+	public GameScreen game;
 	public Inventory inventory = new Inventory();
 	public Item attackItem;
 	public Item activeItem;
@@ -35,7 +35,7 @@ public class Player extends Mob {
 	private int onStairDelay;
 	public int invulnerableTime = 0;
 
-	public Player(PortedGame game) {
+	public Player(GameScreen game) {
 		this.game = game;
 		x = 24;
 		y = 24;
@@ -122,7 +122,7 @@ public class Player extends Mob {
 		}
 		if (Gdx.input.isKeyPressed(Globals.KEY_MENU)) {
 			if (!use()) {
-				game.setMenu(new InventoryMenu(this));
+				game.setMenu(new InventoryMenu(this, game));
 			}
 		}
 		if (attackTime > 0)
@@ -458,6 +458,6 @@ public class Player extends Mob {
 
 	public void gameWon() {
 		level.player.invulnerableTime = 60 * 5;
-		game.won();
+		// game.won();
 	}
 }

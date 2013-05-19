@@ -73,9 +73,12 @@ public class TitleScreen implements Screen {
 	}
 
 	public void tick() {
-		if (Gdx.input.isKeyPressed(Keys.UP))
+
+		game.input.tick();
+
+		if (game.input.up.down)
 			selected--;
-		if (Gdx.input.isKeyPressed(Keys.DOWN))
+		if (game.input.down.down)
 			selected++;
 
 		int len = options.length;
@@ -84,8 +87,7 @@ public class TitleScreen implements Screen {
 		if (selected >= len)
 			selected -= len;
 
-		if (Gdx.input.isKeyPressed(Globals.KEY_ATTACK)
-				|| Gdx.input.isKeyPressed(Globals.KEY_MENU)) {
+		if (game.input.attack.down || game.input.menu.down) {
 			if (selected == 0) {
 				// FIXME
 				// Sound.test.play();

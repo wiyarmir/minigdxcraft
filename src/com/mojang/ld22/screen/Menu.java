@@ -4,15 +4,18 @@ import java.util.List;
 
 import com.mojang.ld22.gfx.Color;
 
-import es.wiyarmir.minigdxcraft.PortedGame;
+import es.wiyarmir.minigdxcraft.PortInputHandler;
 import es.wiyarmir.minigdxcraft.gfx.PortFont;
 import es.wiyarmir.minigdxcraft.gfx.PortScreen;
+import es.wiyarmir.minigdxcraft.screen.GameScreen;
 
 public class Menu {
-	protected PortedGame game;
+	protected GameScreen game; 
+	protected PortInputHandler input;
 
-	public void init(PortedGame game) {
+	public void init(GameScreen game, PortInputHandler input) {
 		this.game = game;
+		this.input = input;
 	}
 
 	public void tick() {

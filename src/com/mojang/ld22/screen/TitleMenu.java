@@ -20,9 +20,9 @@ public class TitleMenu extends Menu {
 
 	@Override
 	public void tick() {
-		if (Gdx.input.isKeyPressed(Keys.UP))
+		if (input.up.clicked)
 			selected--;
-		if (Gdx.input.isKeyPressed(Keys.DOWN))
+		if (input.down.clicked)
 			selected++;
 
 		int len = options.length;
@@ -31,8 +31,7 @@ public class TitleMenu extends Menu {
 		if (selected >= len)
 			selected -= len;
 
-		if (Gdx.input.isKeyPressed(Globals.KEY_ATTACK)
-				|| Gdx.input.isKeyPressed(Globals.KEY_MENU)) {
+		if (input.attack.clicked || input.menu.clicked) {
 			if (selected == 0) {
 				Sound.test.play();
 				game.resetGame();

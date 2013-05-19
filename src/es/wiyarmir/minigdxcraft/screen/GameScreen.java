@@ -10,6 +10,7 @@ import com.mojang.ld22.level.tile.Tile;
 import com.mojang.ld22.screen.Menu;
 
 import es.wiyarmir.minigdxcraft.Globals;
+import es.wiyarmir.minigdxcraft.PortInputHandler;
 import es.wiyarmir.minigdxcraft.PortedGame;
 import es.wiyarmir.minigdxcraft.gfx.PortScreen;
 
@@ -23,7 +24,7 @@ public class GameScreen implements Screen {
 	private int[] colors = new int[256];
 	private int tickCount = 0;
 	public int gameTime = 0;
-	private PortedGame game;
+	public PortedGame game;
 
 	private int currentLevel;
 	private Level[] levels;
@@ -64,7 +65,7 @@ public class GameScreen implements Screen {
 		// levels[0] = new Level(128, 128, -3, levels[1]);
 
 		level = levels[currentLevel];
-		player = new Player(game);
+		player = new Player(this);
 		player.findStartPos(level);
 		level.add(player);
 
@@ -124,19 +125,21 @@ public class GameScreen implements Screen {
 	}
 
 	private void renderGui() {
+
+		// BG
 		for (int y = 0; y < 2; y++) {
 			for (int x = 0; x < 20; x++) {
-				screen.render(x * 8, screen.h - 16 + y * 8, 0 + 12 * 32,
+				screen.render(x * 8, screen.h - 8 + y * 8, 21,
 						Color.get(000, 000, 000, 000), 0);
 			}
 		}
 
 		for (int i = 0; i < 10; i++) {
 			if (i < player.health)
-				screen.render(i * 8, screen.h - 16, 0 + 12 * 32,
+				screen.render(i * 8, screen.h - 8, 0 + 12 * 32,
 						Color.get(000, 200, 500, 533), 0);
 			else
-				screen.render(i * 8, screen.h - 16, 0 + 12 * 32,
+				screen.render(i * 8, screen.h - 8, 0 + 12 * 32,
 						Color.get(000, 100, 000, 000), 0);
 
 			if (player.staminaRechargeDelay > 0) {
@@ -144,14 +147,14 @@ public class GameScreen implements Screen {
 					screen.render(i * 8, screen.h - 8, 1 + 12 * 32,
 							Color.get(000, 555, 000, 000), 0);
 				else
-					screen.render(i * 8, screen.h - 8, 1 + 12 * 32,
+					screen.render(i * 8, screen.h, 1 + 12 * 32,
 							Color.get(000, 110, 000, 000), 0);
 			} else {
 				if (i < player.stamina)
-					screen.render(i * 8, screen.h - 8, 1 + 12 * 32,
+					screen.render(i * 8, screen.h, 1 + 12 * 32,
 							Color.get(000, 220, 550, 553), 0);
 				else
-					screen.render(i * 8, screen.h - 8, 1 + 12 * 32,
+					screen.render(i * 8, screen.h, 1 + 12 * 32,
 							Color.get(000, 110, 000, 000), 0);
 			}
 		}
@@ -208,34 +211,37 @@ public class GameScreen implements Screen {
 	}
 
 	public void tick() {
+
 		tickCount++;
 		if (!player.removed && !hasWon)
 			gameTime++;
-
-		if (player.removed) {
-			playerDeadTime++;
-			if (playerDeadTime > 60) {
-				// FIXME open dead menu
-			}
+		if (menu != null) {
+			menu.tick();
 		} else {
-			if (pendingLevelChange != 0) {
-				// FIXME level transition
-				pendingLevelChange = 0;
+			if (player.removed) {
+				playerDeadTime++;
+				if (playerDeadTime > 60) {
+					// FIXME open dead menu
+				}
+			} else {
+				if (pendingLevelChange != 0) {
+					// FIXME level transition
+					pendingLevelChange = 0;
+				}
 			}
-		}
-		if (wonTimer > 0) {
-			if (--wonTimer == 0) {
-				// FIXME won
+			if (wonTimer > 0) {
+				if (--wonTimer == 0) {
+					// FIXME won
+				}
 			}
+
+			level.tick();
+			Tile.tickCount++;
 		}
-
-		level.tick();
-		Tile.tickCount++;
-
 	}
 
 	public void setMenu(Menu menu) {
-		Gdx.app.log(Globals.TAG, "PortedGame setMenu()");
+		Gdx.app.log(Globals.TAG, "GameScreen setMenu():" + menu);
 		this.menu = menu;
 	}
 
