@@ -35,7 +35,7 @@ public class PortScreen {
 		int srcX = tile % 32, srcY = tile / 32;
 		boolean flipX = (bits & BIT_MIRROR_X) > 0;
 		boolean flipY = (bits & BIT_MIRROR_Y) > 0;
-		game.batch.draw(texture, x * Globals.SCALE, (Globals.HEIGHT - y)
+		game.batch.draw(texture, x * Globals.SCALE, (Globals.HEIGHT - y - 8)
 				* Globals.SCALE, 8 * Globals.SCALE, 8 * Globals.SCALE,
 				srcX * 8, srcY * 8, 8, 8, flipX, flipY);
 	}

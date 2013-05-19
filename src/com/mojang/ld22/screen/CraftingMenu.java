@@ -27,7 +27,7 @@ public class CraftingMenu extends Menu {
 	public CraftingMenu(List<Recipe> recipes, Player player) {
 
 		super(player.game, player.game.game.input);
-		
+
 		this.recipes = new ArrayList<Recipe>(recipes);
 		this.player = player;
 
@@ -47,12 +47,12 @@ public class CraftingMenu extends Menu {
 	}
 
 	public void tick() {
-		if (Gdx.input.isKeyPressed(Globals.KEY_MENU))
+		if (input.menu.clicked)
 			game.setMenu(null);
 
-		if (Gdx.input.isKeyPressed(Keys.UP))
+		if (input.up.clicked)
 			selected--;
-		if (Gdx.input.isKeyPressed(Keys.DOWN))
+		if (input.down.clicked)
 			selected++;
 
 		int len = recipes.size();
@@ -63,7 +63,7 @@ public class CraftingMenu extends Menu {
 		if (selected >= len)
 			selected -= len;
 
-		if (Gdx.input.isKeyPressed(Globals.KEY_ATTACK) && len > 0) {
+		if (input.attack.clicked && len > 0) {
 			Recipe r = recipes.get(selected);
 			r.checkCanCraft(player);
 			if (r.canCraft) {
